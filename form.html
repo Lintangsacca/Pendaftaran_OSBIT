@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pendaftaran Ekstra OSBIT</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f0f8ff;
+      color: #000;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    header {
+      background-color: #001f3f;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .form-container {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      max-width: 500px;
+      margin: 40px auto;
+    }
+
+    label {
+      color: #001f3f;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background-color: #001f3f;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #0074D9;
+    }
+
+    footer {
+      background-color: #001f3f;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pendaftaran Ekstrakurikuler OSBIT</h1>
+    <p>Tahun Ajaran Baru - Daftarkan Dirimu Sekarang!</p>
+  </header>
+
+  <main>
+    <div class="form-container">
+      <h2 class="text-center mb-4" style="color: #001f3f;">Formulir Pendaftaran</h2>
+      <form id="osbit-form">
+        <div class="mb-3">
+          <label for="nama" class="form-label">Nama Lengkap</label>
+          <input type="text" class="form-control" id="nama" name="nama" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="kelas" class="form-label">Kelas</label>
+          <input type="text" class="form-control" id="kelas" name="kelas" placeholder="Contoh: X-E1" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="jurusan" class="form-label">Pilih Jurusan</label>
+          <select class="form-select" id="jurusan" name="jurusan" required>
+            <option value="">-- Pilih Salah Satu --</option>
+            <option value="web design">Web Design</option>
+            <option value="game development">Game Development</option>
+            <option value="robotik">Robotik</option>
+            <option value="design expert">Design Expert</option>
+            <option value="ilustrasi">Ilustrasi</option>
+            <option value="videografi">Videografi</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Daftar Sekarang</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 OSBIT - OLAH SISTEM BERBASIS INFORMASI DAN TEKNOLOGI
+  </footer>
+
+  <script>
+    document.getElementById("osbit-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const data = {
+        nama: document.getElementById("nama").value,
+        kelas: document.getElementById("kelas").value,
+        jurusan: document.getElementById("jurusan").value,
+      };
+
+      fetch("https://script.google.com/macros/s/AKfycbxxxxxxx/exec", { // Ganti dengan URL Web App milikmu
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(response => response.text())
+      .then(result => {
+        alert("Pendaftaran berhasil!");
+        document.getElementById("osbit-form").reset();
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("Terjadi kesalahan. Silakan coba lagi.");
+      });
+    });
+  </script>
+</body>
+</html>
+
+  
