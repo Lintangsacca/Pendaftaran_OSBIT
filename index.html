@@ -127,22 +127,24 @@
         jurusan: document.getElementById("jurusan").value
       };
 
-      fetch("https://script.google.com/macros/s/AKfycbwINhCgnmTogyOxpVmY-2_L8mjrHp8sqH3Y7lQ7GXWNFQssLdQ8HwPrJjKBZPWqpgANpw/exec", { // Ganti dengan Web App milikmu
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then(response => response.text())
-        .then(result => {
-          feedback.innerText = "✅ Pendaftaran berhasil! Terima kasih sudah mendaftar.";
-          document.getElementById("osbit-form").reset();
-        })
-        .catch(error => {
-          console.error("Error:", error);
-          feedback.innerText = "❌ Terjadi kesalahan. Silakan coba lagi.";
-        });
+    const formData = new FormData();
+formData.append("nama", data.nama);
+formData.append("kelas", data.kelas);
+formData.append("jurusan", data.jurusan);
+
+fetch("https://script.google.com/macros/s/AKfycbwINhCgnmTogyOxpVmY-2_L8mjrHp8sqH3Y7lQ7GXWNFQssLdQ8HwPrJjKBZPWqpgANpw/exec", {
+  method: "POST",
+  body: formData
+})
+  .then(response => response.text())
+  .then(result => {
+    feedback.innerText = "✅ Pendaftaran berhasil!";
+    document.getElementById("osbit-form").reset();
+  })
+  .catch(error => {
+    console.error("Error:", error);
+    feedback.innerText = "❌ Terjadi kesalahan.";
+  });
     });
   </script>
 </body>
