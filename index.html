@@ -116,36 +116,34 @@
   </footer>
 
   <script>
-    document.getElementById("osbit-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const feedback = document.getElementById("feedback");
-      feedback.innerText = "Sedang mengirim data...";
+  document.getElementById("osbit-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const feedback = document.getElementById("feedback");
+    feedback.innerText = "Sedang mengirim data...";
 
-      const data = {
-        nama: document.getElementById("nama").value.trim(),
-        kelas: document.getElementById("kelas").value.trim(),
-        jurusan: document.getElementById("jurusan").value
-      };
+    const data = {
+      nama: document.getElementById("nama").value.trim(),
+      kelas: document.getElementById("kelas").value.trim(),
+      jurusan: document.getElementById("jurusan").value
+    };
 
-    const formData = new FormData();
-formData.append("nama", data.nama);
-formData.append("kelas", data.kelas);
-formData.append("jurusan", data.jurusan);
+    const query = new URLSearchParams({
+      nama: data.nama,
+      kelas: data.kelas,
+      jurusan: data.jurusan
+    }).toString();
 
-fetch("https://script.google.com/macros/s/AKfycbwINhCgnmTogyOxpVmY-2_L8mjrHp8sqH3Y7lQ7GXWNFQssLdQ8HwPrJjKBZPWqpgANpw/exec", {
-  method: "POST",
-  body: formData
-})
-  .then(response => response.text())
-  .then(result => {
-    feedback.innerText = "✅ Pendaftaran berhasil!";
-    document.getElementById("osbit-form").reset();
-  })
-  .catch(error => {
-    console.error("Error:", error);
-    feedback.innerText = "❌ Terjadi kesalahan.";
+    fetch("https://script.google.com/macros/s/AKfycbwINhCgnmTogyOxpVmY-2_L8mjrHp8sqH3Y7lQ7GXWNFQssLdQ8HwPrJjKBZPWqpgANpw/exec?" + query)
+      .then(response => response.text())
+      .then(result => {
+        feedback.innerText = "✅ Pendaftaran berhasil!";
+        document.getElementById("osbit-form").reset();
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        feedback.innerText = "❌ Terjadi kesalahan.";
+      });
   });
-    });
-  </script>
+</script>
 </body>
 </html>
